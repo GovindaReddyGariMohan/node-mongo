@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Read all
+// Read All
 router.get('/', async (req, res) => {
   try {
     const items = await Item.find();
