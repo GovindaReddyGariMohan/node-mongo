@@ -1,9 +1,12 @@
+require('dotenv').config(); // Load .env variables at the top
+
 const express = require('express');
 const mongoose = require('mongoose');
 const itemRoutes = require('./routes/itemRoutes');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 5000;
+const MONGO_URI = process.env.MONGO_URI;
 
 // Middleware
 app.use(express.json());
@@ -12,7 +15,7 @@ app.use(express.json());
 app.use('/api/items', itemRoutes);
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://mohan8985320915:abcd1234@cluster0.5vdba.mongodb.net/crud_db', {
+mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
