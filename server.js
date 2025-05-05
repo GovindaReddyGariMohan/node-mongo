@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const itemRoutes = require('./routes/itemRoutes');
 
 const app = express();
@@ -8,7 +9,13 @@ const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
 
 // Middleware
-app.use(express.json());
+app.use(cors()); // Allow CORS for frontend
+app.use(express.json()); // Parse JSON requests
+
+// Optional: root route for testing
+app.get('/', (req, res) => {
+  res.send('API is running');
+});
 
 // Routes
 app.use('/api/items', itemRoutes);
